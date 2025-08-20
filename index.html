@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clud Social Victoria | Restaurante Gourmet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536270010_122108135300971952_3812421457215294677_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=SSqUf6YtwMIQ7kNvwHfTvhd&_nc_oc=AdlvC2LzYTId4zvSgiYkiEp9ClaxFZRYIWC2wPFEfplC_LLKDk7kVaqCMgHsmJW-2Xk&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=mDCjlBsfJX3KSWwNpiH1Zg&oh=00_AfV4-PQjk5gy6JlJzt66WGStH5vjIhHvFN9LobeIVnBRWw&oe=68A870CD');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .menu-item:hover .menu-overlay {
+            opacity: 1;
+        }
+        
+        .menu-overlay {
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header/Navbar -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-utensils text-2xl text-amber-600 mr-2"></i>
+                <h1 class="text-xl font-bold text-gray-800">Club Social Victoria</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="text-gray-800 hover:text-amber-600 transition">Inicio</a>
+                <a href="#menu" class="text-gray-800 hover:text-amber-600 transition">Menú</a>
+                <a href="#galeria" class="text-gray-800 hover:text-amber-600 transition">Galería</a>
+                <a href="#testimonios" class="text-gray-800 hover:text-amber-600 transition">Testimonios</a>
+                <a href="#contacto" class="text-gray-800 hover:text-amber-600 transition">Contacto</a>
+            </nav>
+            
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
+            <a href="#inicio" class="block py-2 text-gray-800 hover:text-amber-600 transition">Inicio</a>
+            <a href="#menu" class="block py-2 text-gray-800 hover:text-amber-600 transition">Menú</a>
+            <a href="#galeria" class="block py-2 text-gray-800 hover:text-amber-600 transition">Galería</a>
+            <a href="#testimonios" class="block py-2 text-gray-800 hover:text-amber-600 transition">Testimonios</a>
+            <a href="#contacto" class="block py-2 text-gray-800 hover:text-amber-600 transition">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg min-h-screen flex items-center justify-center text-white pt-20">
+        <div class="container mx-auto px-4 text-center animate-fade-in">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Sabores Auténticos</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Descubre la auténtica cocina chilena en un ambiente acogedor y elegante</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#menu" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300">Ver Menú</a>
+                <a href="#contacto" class="bg-transparent hover:bg-white hover:text-gray-900 border-2 border-white text-white px-8 py-3 rounded-full font-semibold transition duration-300">Reservar Mesa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/534148031_122108683022971952_7879702305693812976_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=f727a1&_nc_ohc=sHdywyqMAfAQ7kNvwG5n2S7&_nc_oc=AdkXjMdn3npcqE5zy-tQjKyZWLHO0wY1vHb0b_f3JGQu0R3LxwNyUb8L1ai0nIVTUbY&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=y-OlycqQ0GiMJCQA8bEyZA&oh=00_AfVZXZONuEpargvribaTx5B-hBEb-IqvvCDcjOwKdqyjNQ&oe=68A90EE9" alt="Chef preparando comida" class="rounded-lg shadow-xl w-full h-auto">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Nuestra Historia</h2>
+                    <p class="text-gray-600 mb-4">Fundado en 1910, Club Social Victoria nació del sueño de compartir la rica tradición culinaria de la región de la Araucania con nuestra comunidad. Cada plato cuenta una historia de tradición, pasión y los ingredientes más frescos.</p>
+                    <p class="text-gray-600 mb-6">Nuestros chefs tradiciones de nuestra ciudad. Restaurante con más de 3 decadas de experiencia, los mejores de la Region, ha creado un menú que honra las recetas tradicionales mientras incorpora toques innovadores.</p>
+                    <div class="flex items-center">
+                        <div class="mr-4">
+                            <i class="fas fa-leaf text-3xl text-amber-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Ingredientes Frescos</h3>
+                            <p class="text-gray-600">Trabajamos con productores locales para garantizar la máxima frescura.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestro Menú</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Una selección de nuestros platos más destacados, preparados con ingredientes de temporada</p>
+            </div>
+            
+            <div class="flex flex-wrap -mx-4 mb-12">
+                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
+                        <div class="relative overflow-hidden h-48">
+                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536281661_122109354860971952_3540908658091928995_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=f727a1&_nc_ohc=JDCPo7t7FhgQ7kNvwFpKDug&_nc_oc=Adkb2oI7jB7FxqNmjQr0xKd7-VaaiqGEjx0ycvEoJg9JHFMkSe0aoWkFjrkDa5YAZ4A&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=AkfBCqYC5_LgUrevPcbEQQ&oh=00_AfWNCNUCXRUGewkXUhhL9mjWK_8BAw7wlyCesMNSz3ZOAw&oe=68AAF9B2" alt="Entradas" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-2xl font-bold">Entradas</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Palta Reina</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Huevo Peruano</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Tomate York</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
+                        <div class="relative overflow-hidden h-48">
+                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536269990_122109353792971952_6722819990932670277_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=_r2Zg_I2t1YQ7kNvwGOTs-K&_nc_oc=AdktXBIazPxZZY8oMeBWNZobuP2ZTYU1vOZySwyrapIXdcxR-QYN0ySasrq-rY_UZ40&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=olx4jd7ZeFJRyj0mSa-8OA&oh=00_AfXH4yiAUzxS5mL-84jhQD41y_ys1CQucaNMXUCzSBJ-eQ&oe=68AAD7BD" alt="Platos Principales" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-2xl font-bold">Fondo</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Plateada</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Costillar de Cerdo Ahumado</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Lomo a lo Pobre</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
+                        <div class="relative overflow-hidden h-48">
+                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536272906_122109368774971952_1521439836372141768_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=f727a1&_nc_ohc=2vRKAbxmvLQQ7kNvwHvUJGD&_nc_oc=AdkPwz0Wb7q0RIlNyhx6QlzRWwAtP5mn3r_rCC2iE5XaDNjmc8SeGN0ScJIoieWpssI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=HUV5Pb6NSvdP6cFvDJFdpg&oh=00_AfV_rHCc5yHE0zbC5Mcz5c5Pk3IGqK7_EsRfZ4wlKDofnQ&oe=68AB07A4" alt="Ensaladas" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-2xl font-bold">Empanada</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Empanada de Pino</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Empanada de Queso</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Empanada de Horno</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
+                        <div class="relative overflow-hidden h-48">
+                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536269766_122109369680971952_9003718111970200344_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=7stipRFWjcAQ7kNvwFQFd3c&_nc_oc=AdnAFAUnwn3f5I1c1SAvtTk73kYbpdMRm70ww04aBdyYYh2M4HILVyhonNRMoxYAS6c&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=Eiop35YbKyV-l6ctqd-LcQ&oh=00_AfU-BcBTWLeMsfIk82UinajxD1Of1CWQRUu4yDVXmTUUXA&oe=68AB0477" alt="Postres" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <h3 class="text-white text-2xl font-bold">Brasero</h3>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Brasera para Dos</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Brasera para Tres</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Brasera para Cuatro</span>
+                                    <span class="text-amber-600">$</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="inline-block bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300">Ver Menú Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestra Galería</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Un vistazo a nuestros platos, ambiente y eventos especiales</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536478579_122109350888971952_1487042408387031331_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=f727a1&_nc_ohc=zrIjr50wuWoQ7kNvwFXQIGj&_nc_oc=AdmPsg4rud6WhU3TdP83wWgRv9NCjuVn7N3rc18LAAshDVLSHn1SKvoM__iHWqWBI48&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=Hc8n5BPFC1HcCr0-yOc-gA&oh=00_AfVKSlSQYgt_BYazpPHXJ1DEkh5hmjPKIrztszG-d3_hXA&oe=68AAE658" alt="Margarita" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536146246_122108692520971952_5314672314057387633_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=f727a1&_nc_ohc=sXx0qn8d0JUQ7kNvwHJkv2d&_nc_oc=AdlV_wXJid3S1iWQpuDKPcSlyGLkEsORVKGynKXdg57-HssEJ6So66S9VOIVdlKbSjE&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=237OvB0kYYIjpdupjhQTXQ&oh=00_AfVg2CY3hv1pIXd0N5dTVMvvQAv0WX1PEaZHsvkgdYHFOw&oe=68A91BDD" alt="Baina" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/534982119_122108692526971952_6134847611655413751_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=oRJ0qGQFPzoQ7kNvwG3p21K&_nc_oc=AdlV3e161AAzc3KblJJzPdkfzRhKukfRi1c3tSeIA5uzoX4t0_LJ4pagnYzxPMVYrYU&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=JIU_2gSWRa59wqu_m1eA0Q&oh=00_AfXc8iJV17CbXy9I9Qt7UtTgzeWdwep6-2p21hwrJlPjlg&oe=68A94662" alt="Sangria" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/533928643_122108689268971952_3425484622989564664_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=-hEerPr3xYkQ7kNvwHlkemQ&_nc_oc=AdkxnRfR-IFbFF-nh81xsYRgp7hctv-IeAGNcWuCK0ufnYT7TkGI2ow4IwdnHnNMKWI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=5gQ-r4i43m-aAvRMCTm89A&oh=00_AfXOO9TiklINVbaxC7zyleJlTk_-dzmbDjWGlD3AW4uElA&oe=68A93EE0" alt="Barra" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536285239_122109405884971952_9060523884027548371_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=oWkI7SpjZYMQ7kNvwGPlNA7&_nc_oc=AdkvHh8bcMomdFGNEJeRkHoKn8sReCkMlos_c7kA1UNX9RMVe68VEGAxtkjVO1VQoRg&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=xYM0OhL0S_cqB8Pgzvw72Q&oh=00_AfX-X5jjOVKAIP4IrPKhM4P9ffcKz61vLolosrA5CqvX2g&oe=68AB1B3D" alt="Sour Empanada" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536273892_122109406982971952_5822333039095568729_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=f727a1&_nc_ohc=gzfQI7lF85YQ7kNvwFJOlR8&_nc_oc=AdkrlfOsvtlLJU52OBu2VgU8XYETR6eaD5NyOhII1YreFEEhxeC9JREvptteGSWZrO0&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=1Us6MxHDxbUlxFxuaNCpQg&oh=00_AfWz3SxX69-YtAENcaPLJFfORxZzO54HKyB0F5fAMuDeiw&oe=68AB34C4" alt="Ensaladas" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536280418_122109409238971952_1996310312974086377_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=110&ccb=1-7&_nc_sid=f727a1&_nc_ohc=KwV4yGv3gQkQ7kNvwEwxqt3&_nc_oc=AdmmIp2y9-xDeXVJr2qogg5qnYLWCH9SC_MR2OwXHXUTgzUTcdEiQq3Z3WXU1n_82Aw&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=BSdmAK9xBPgPaEUZHasy_A&oh=00_AfUacqrQ6uxdp6cAB8PrehjYFdyLpmvmD9aYygcQ3zAyXA&oe=68AB0065" alt="Pescado" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536670149_122108692592971952_5129412856019465775_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=f727a1&_nc_ohc=q07fvbRKnRgQ7kNvwHKJalg&_nc_oc=Adm7Oq30zeYVPvPGTI6zzJMjKP3aWF3vuZHK3IeX3qE_tS3udSz1569num7xTu9dLJI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=p8u0CFTMgK1-8VWipFUCTQ&oh=00_AfWgdtzBdkDnz2JQz4P3k62GChIDyPXwLC3oELKvBU7Tow&oe=68A92A14" alt="Apperol" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-lg shadow-md">
+                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/534699655_122108692514971952_2553792779533631543_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=MgF_qx4uBxIQ7kNvwFpdI5g&_nc_oc=AdnGo7PIn1O_oT3QdhXeG7OBaBd5Vi2ZZUZ3T4Sc6dJo0kkpWv6Ym19VMJMV-qKvrlI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=FlhCqnxS6HKuhk3A0oL_6g&oh=00_AfVyPG1EJ-H5LFL6tKfHoZJPpFDui00VBMDvvkorBEkvzA&oe=68AAD2F7" alt="Pisco Sour" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Lo que dicen nuestros clientes</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Experiencias reales de nuestros comensales</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-500 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Las mejores empanadas que he probado en esta región. El ambiente es acogedor y el servicio impecable.</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/34.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Sofia Muñoz</h4>
+                            <p class="text-gray-500 text-sm">Cliente habitual</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-500 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Celebramos nuestro aniversario aquí y fue una experiencia memorable. La atención personalizada y los platos exquisitos hicieron la tarde perfecta."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Carlos Jorquera</h4>
+                            <p class="text-gray-500 text-sm">Primera visita</p> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-amber-500 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Como amante de la cocina chilena, puedo decir que este restaurante captura auténticamente los sabores de la región. ¡Los cocktail son para morirse!."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/13.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Ana Torres</h4>
+                            <p class="text-gray-500 text-sm">Cliente habitual</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Contáctanos</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Reserva tu mesa o envíanos un mensaje. Estamos aquí para hacerte disfrutar de una experiencia culinaria inolvidable.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Nombre</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-700 mb-2">Teléfono</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-2">Asunto</label>
+                            <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                <option value="">Selecciona una opción</option>
+                                <option value="reservation">Reserva</option>
+                                <option value="event">Evento especial</option>
+                                <option value="feedback">Comentarios</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2">Mensaje</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                        </div>
+                        <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300 w-full md:w-auto">Enviar Mensaje</button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-100 p-8 rounded-lg h-full">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Información de contacto</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="text-amber-600 mt-1 mr-4">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Dirección</h4>
+                                    <p class="text-gray-600">Confederacion Suiza, 1053<br>Victoria, Chile</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-amber-600 mt-1 mr-4">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Teléfono</h4>
+                                    <p class="text-gray-600">(45) 2841560</p>
+                                    <p class="text-gray-600">+56 962516121 (WhatsApp)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-amber-600 mt-1 mr-4">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Email</h4>
+                                    <p class="text-gray-600">rhclubsocial@hotmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="text-amber-600 mt-1 mr-4">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Horario</h4>
+                                    <p class="text-gray-600">Lunes - Viernes: 09:30 - 18:00</p>
+                                    <p class="text-gray-600">Sábado - Domingo: 09:30 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold text-gray-800 mb-4">Síguenos en redes sociales</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.facebook.com/profile.php?id=61579158587405" class="bg-gray-200 hover:bg-amber-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/club.socialvictoria/" class="bg-gray-200 hover:bg-amber-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.073146719947!2d-72.334599!3d-38.2330624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966b14b4b87c30c3%3A0x53f9fbb906edc1b1!2sClub%20Social%20Victoria!5e0!3m2!1ses-419!2scl!4v1712345678901!5m2!1ses-419!2scl" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-utensils text-2xl text-amber-600 mr-2"></i>
+                        CLUB SOCIAL VICTORIA
+                    </h3>
+                    <p class="text-gray-400">Ofreciendo auténtica cocina CHILENA desde 1992. Pasión, tradición y calidad en cada plato.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Enlaces rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-400 hover:text-amber-500 transition">Inicio</a></li>
+                        <li><a href="#menu" class="text-gray-400 hover:text-amber-500 transition">Menú</a></li>
+                        <li><a href="#galeria" class="text-gray-400 hover:text-amber-500 transition">Galería</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-amber-500 transition">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Horario</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex justify-between">
+                            <span>Lun - Vie</span>
+                            <span>09:30 - 18:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Sáb - Dom</span>
+                            <span>09:30 - 18:00</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-lg font-semibold mb-2">Reservas</h4>
+                        <p class="text-gray-400">(45) 2841560</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Suscríbete para recibir nuestras promociones y eventos especiales.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Tu email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
+                        <button type="submit" class="bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Club Social Victoria. Todos los derechos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-amber-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
