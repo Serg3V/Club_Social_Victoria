@@ -3,372 +3,1053 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clud Social Victoria | Restaurante Gourmet</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Club Social Victoria | Restaurante Gourmet</title>
+    <link rel="canonical" href="https://clubsocialvictoria.com">
+    <meta name="description" content="Restaurante Club Social Victoria - Auténtica cocina chilena en Victoria. Disfruta de nuestros platos tradicionales en un ambiente acogedor.">
+    <meta name="keywords" content="restaurante, Victoria, comida chilena, empanadas, platos típicos, reservas">
+    <meta name="author" content="Club Social Victoria">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/706/706797.png" type="image/png">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50:'#fff8f0', 100:'#ffedd5', 200:'#fed7aa', 300:'#fdba74', 400:'#fb923c', 500:'#d97706', 600:'#b45309', 700:'#92400e', 800:'#78350f', 900:'#451a03' },
+                        warm: { 50:'#fdf8f0', 100:'#faf0e0', 200:'#f5e0c0', 300:'#e8c99a' },
+                        dark: '#1a1a1a'
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/538119335_122110607324971952_4512302742208051460_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=f727a1&_nc_ohc=vNFckI1TSpUQ7kNvwFmduK6&_nc_oc=Admj8EQQA3-wv5UbidyeinZ2bOIUxwF1285zV6GNKjkTXoze4gfop6fKAC-9tFSemzQ&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=yDUCVW__-zyR5pZE0Eo2mA&oh=00_AfVy0m7y2Qq-8GtlSkomTIO3lglQ0nyJdI75wO7CqHDVnA&oe=68AEF04A');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #d97706; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b45309; }
+
+        /* Hero parallax */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,26,0.85) 0%, rgba(146,64,14,0.6) 50%, rgba(26,26,26,0.9) 100%);
+            z-index: 1;
+        }
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            background-image: url("menu/IMG_20240918_165516.jpg");
             background-size: cover;
             background-position: center;
+            transform: scale(1.1);
+            transition: transform 0.1s linear;
         }
-        
-        .menu-item:hover .menu-overlay {
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
             opacity: 1;
+            transform: translateY(0);
         }
-        
-        .menu-overlay {
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+
+        /* Glassmorphism nav */
+        .glass-nav {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.4s ease;
+        }
+        .glass-nav.scrolled {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+        }
+        .glass-nav.scrolled .nav-text { color: #1a1a1a !important; }
+        .glass-nav.scrolled .nav-logo { color: #1a1a1a !important; }
+        .glass-nav.scrolled .nav-btn {
+            background: #d97706 !important;
+            color: white !important;
+        }
+
+        /* Nav link underline */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #d97706;
             transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* Menu cards */
+        .menu-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease forwards;
+        .menu-card:hover {
+            transform: translateY(-8px);
+        }
+        .menu-card:hover .menu-card-img {
+            transform: scale(1.08);
+        }
+        .menu-card-img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Gallery lightbox */
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26,26,26,0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.open { display: flex; opacity: 1; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* WhatsApp float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 100;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+            transition: all 0.3s ease;
+            animation: pulse-green 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.12);
+            background: #128C7E;
+            box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+        }
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+            50% { box-shadow: 0 6px 32px rgba(37,211,102,0.6); }
+        }
+
+        /* Section divider */
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #d97706, #fb923c);
+            border-radius: 4px;
+        }
+
+        /* Counter animation */
+        .stat-number { font-variant-numeric: tabular-nums; }
+
+        /* Mobile menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu-overlay.open { opacity: 1; pointer-events: all; }
+
+        .mobile-menu-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            max-width: 85vw;
+            height: 100vh;
+            background: #1a1a1a;
+            z-index: 95;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 2rem;
+        }
+        .mobile-menu-panel.open { transform: translateX(0); }
+
+        /* Testimonial card */
+        .testimonial-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        /* Event card */
+        .event-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .event-card:hover {
+            transform: translateY(-6px);
+        }
+        .event-card:hover .event-img { transform: scale(1.06); }
+        .event-img { transition: transform 0.6s ease; }
+
+        /* Floating label */
+        .form-group { position: relative; }
+        .form-group label {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: white;
+            padding: 0 6px;
+        }
+        .form-group textarea ~ label {
+            top: 20px;
+        }
+        .form-group input:focus ~ label,
+        .form-group input:not(:placeholder-shown) ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group textarea:not(:placeholder-shown) ~ label,
+        .form-group select ~ label {
+            top: 0;
+            font-size: 0.75rem;
+            color: #d97706;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(26,26,26,0.85);
+            backdrop-filter: blur(10px);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 80;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: #d97706;
+            border-color: #d97706;
+        }
+
+        /* Category nav */
+        .cat-nav {
+            scrollbar-width: none;
+        }
+        .cat-nav::-webkit-scrollbar { display: none; }
+        .cat-link {
+            position: relative;
+            white-space: nowrap;
+            padding: 8px 0;
+        }
+        .cat-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d97706;
+            transition: width 0.3s ease;
+        }
+        .cat-link:hover::after, .cat-link.active::after { width: 100%; }
+
+        /* Shimmer effect on hero text */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .hero-shimmer {
+            background: linear-gradient(90deg, #ffffff 0%, #fbbf24 25%, #ffffff 50%, #fbbf24 75%, #ffffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 6s linear infinite;
         }
     </style>
 </head>
-<body class="font-sans bg-gray-50">
-    <!-- Header/Navbar -->
-    <header class="fixed w-full bg-white shadow-md z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <i class="fas fa-utensils text-2xl text-amber-600 mr-2"></i>
-                <h1 class="text-xl font-bold text-gray-800">Club Social Victoria</h1>
-            </div>
-            
-            <nav class="hidden md:flex space-x-8">
-                <a href="#inicio" class="text-gray-800 hover:text-amber-600 transition">Inicio</a>
-                <a href="#menu" class="text-gray-800 hover:text-amber-600 transition">Menú</a>
-                <a href="#galeria" class="text-gray-800 hover:text-amber-600 transition">Galería</a>
-                <a href="#testimonios" class="text-gray-800 hover:text-amber-600 transition">Testimonios</a>
-                <a href="#contacto" class="text-gray-800 hover:text-amber-600 transition">Contacto</a>
-            </nav>
-            
-            <div class="md:hidden">
-                <button id="menu-toggle" class="text-gray-800 focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
+<body class="bg-warm-50 font-body text-dark">
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-primary-400 transition z-10"><i class="fas fa-times"></i></button>
+        <img id="lightbox-img" src="" alt="Imagen ampliada">
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu-panel" id="mobile-panel">
+        <div class="flex justify-between items-center mb-10">
+            <span class="text-white font-display text-xl font-bold">Club Social Victoria</span>
+            <button onclick="toggleMobileMenu()" class="text-white text-2xl"><i class="fas fa-times"></i></button>
         </div>
-        
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
-            <a href="#inicio" class="block py-2 text-gray-800 hover:text-amber-600 transition">Inicio</a>
-            <a href="#menu" class="block py-2 text-gray-800 hover:text-amber-600 transition">Menú</a>
-            <a href="#galeria" class="block py-2 text-gray-800 hover:text-amber-600 transition">Galería</a>
-            <a href="#testimonios" class="block py-2 text-gray-800 hover:text-amber-600 transition">Testimonios</a>
-            <a href="#contacto" class="block py-2 text-gray-800 hover:text-amber-600 transition">Contacto</a>
+        <nav class="flex flex-col space-y-1">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-primary-400 py-3 text-lg transition border-b border-gray-800">Inicio</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-primary-400 py-3 text-lg transition border-b border-gray-800">Menú</a>
+            <a href="#galeria" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-primary-400 py-3 text-lg transition border-b border-gray-800">Galería</a>
+            <a href="#eventos" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-primary-400 py-3 text-lg transition border-b border-gray-800">Eventos</a>
+            <a href="#testimonios" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-primary-400 py-3 text-lg transition border-b border-gray-800">Testimonios</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-primary-400 py-3 text-lg transition">Contacto</a>
+        </nav>
+        <div class="mt-10 space-y-4">
+            <a href="tel:+562841560" class="flex items-center text-gray-300 hover:text-primary-400 transition">
+                <i class="fas fa-phone-alt mr-3"></i>(45) 2841560
+            </a>
+            <a href="#reservas" onclick="toggleMobileMenu()" class="block bg-primary-500 hover:bg-primary-600 text-white text-center px-6 py-3 rounded-full font-semibold transition">Reservar Mesa</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header id="navbar" class="glass-nav fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio" class="flex items-center gap-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Logo" class="w-9 h-9">
+                <span class="nav-logo font-display text-xl font-bold text-white transition-colors duration-300">Club Social Victoria</span>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#inicio" class="nav-link nav-text text-white/90 hover:text-primary-300 text-sm font-medium transition active">Inicio</a>
+                <a href="#menu" class="nav-link nav-text text-white/90 hover:text-primary-300 text-sm font-medium transition">Menú</a>
+                <a href="#galeria" class="nav-link nav-text text-white/90 hover:text-primary-300 text-sm font-medium transition">Galería</a>
+                <a href="#eventos" class="nav-link nav-text text-white/90 hover:text-primary-300 text-sm font-medium transition">Eventos</a>
+                <a href="#testimonios" class="nav-link nav-text text-white/90 hover:text-primary-300 text-sm font-medium transition">Testimonios</a>
+                <a href="#contacto" class="nav-link nav-text text-white/90 hover:text-primary-300 text-sm font-medium transition">Contacto</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-5">
+                <a href="tel:+562841560" class="nav-text text-white/80 hover:text-primary-300 text-sm transition flex items-center gap-2">
+                    <i class="fas fa-phone-alt text-xs"></i>(45) 2841560
+                </a>
+                <a href="#reservas" class="nav-btn bg-white/10 hover:bg-primary-500 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border border-white/20 hover:border-primary-500">
+                    Reservar
+                </a>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-white text-2xl" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero-bg min-h-screen flex items-center justify-center text-white pt-20">
-        <div class="container mx-auto px-4 text-center animate-fade-in">
-            <h2 class="text-4xl md:text-6xl font-bold mb-6">Sabores Auténticos</h2>
-            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Descubre la auténtica cocina chilena en un ambiente acogedor y elegante</p>
+    <!-- Hero -->
+    <section id="inicio" class="hero-section">
+        <div class="hero-bg-img" id="hero-bg"></div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="mb-6">
+                <span class="inline-block text-primary-300 text-sm tracking-[0.3em] uppercase font-medium mb-4">Restaurante Gourmet · Victoria, Chile</span>
+            </div>
+            <h2 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6">
+                Sabores <span class="hero-shimmer">Auténticos</span> de Chile
+            </h2>
+            <p class="text-white/75 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Descubre la auténtica cocina chilena en un ambiente acogedor y elegante. Tradición, pasión y los mejores ingredientes de la Araucanía.
+            </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#menu" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300">Ver Menú</a>
-                <a href="#contacto" class="bg-transparent hover:bg-white hover:text-gray-900 border-2 border-white text-white px-8 py-3 rounded-full font-semibold transition duration-300">Reservar Mesa</a>
+                <a href="#menu" class="bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 hover:-translate-y-0.5 text-sm tracking-wide">
+                    EXPLORAR MENÚ
+                </a>
+                <a href="#reservas" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 border border-white/20 hover:border-white/40 text-sm tracking-wide">
+                    RESERVAR MESA
+                </a>
             </div>
         </div>
+
+        <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-white/60"></i>
+        </a>
     </section>
 
-    <!-- About Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/534148031_122108683022971952_7879702305693812976_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=f727a1&_nc_ohc=HG0DUz0Gen0Q7kNvwHTSvEg&_nc_oc=Adl5uEZnn1xErgZj7GzFPLK-7f1WnDh46h4xhP_6rWuW3kV0oYPW2PtgkJIwdePq5ok&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=MOUOVehZHWQLFIWS1TDHOA&oh=00_AfX-_d5uwR6SA5fh7StS7pxNfsXP5l56NfwIb2UHm_ibwA&oe=68AEFDA9" alt="Bar del Restaurante" class="rounded-lg shadow-xl w-full h-auto">
-                </div>
-                <div class="md:w-1/2">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Nuestra Historia</h2>
-                    <p class="text-gray-600 mb-4">Fundado en 1910, Club Social Victoria nació del sueño de compartir la rica tradición culinaria de la región de la Araucania con nuestra comunidad. Cada plato cuenta una historia de tradición, pasión y los ingredientes más frescos.</p>
-                    <p class="text-gray-600 mb-6">Nuestros chefs tradiciones de nuestra ciudad. Restaurante con más de 3 decadas de experiencia, los mejores de la Region, ha creado un menú que honra las recetas tradicionales mientras incorpora toques innovadores.</p>
-                    <div class="flex items-center">
-                        <div class="mr-4">
-                            <i class="fas fa-leaf text-3xl text-amber-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800">Ingredientes Frescos</h3>
-                            <p class="text-gray-600">Trabajamos con productores locales para garantizar la máxima frescura.</p>
+    <!-- About -->
+    <section id="about" class="py-24 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal-left">
+                    <div class="relative">
+                        <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-2xl -z-10"></div>
+                        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-primary-50 rounded-2xl -z-10"></div>
+                        <img src="menu/1755527688672.jpg" alt="Club Social Victoria" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 bg-primary-500 text-white p-6 rounded-2xl shadow-lg">
+                            <div class="text-4xl font-display font-bold">30+</div>
+                            <div class="text-sm opacity-90">Años de tradición</div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestro Menú</h2>
-                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Una selección de nuestros platos más destacados, preparados con ingredientes de temporada</p>
-            </div>
-            
-            <div class="flex flex-wrap -mx-4 mb-12">
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
-                        <div class="relative overflow-hidden h-48">
-                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536281661_122109354860971952_3540908658091928995_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=f727a1&_nc_ohc=JDCPo7t7FhgQ7kNvwFpKDug&_nc_oc=Adkb2oI7jB7FxqNmjQr0xKd7-VaaiqGEjx0ycvEoJg9JHFMkSe0aoWkFjrkDa5YAZ4A&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=AkfBCqYC5_LgUrevPcbEQQ&oh=00_AfWNCNUCXRUGewkXUhhL9mjWK_8BAw7wlyCesMNSz3ZOAw&oe=68AAF9B2" alt="Entradas" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                <h3 class="text-white text-2xl font-bold">Entradas</h3>
+                <div class="lg:w-1/2 reveal-right">
+                    <span class="text-primary-500 text-sm tracking-[0.2em] uppercase font-semibold">Nuestra Historia</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mt-3 mb-6 leading-tight">
+                        Tradición que se <span class="text-primary-500">saborea</span>
+                    </h2>
+                    <p class="text-gray-600 mb-5 leading-relaxed">Fundado en 1910, Club Social Victoria nació del sueño de compartir la rica tradición culinaria de la región de la Araucanía con nuestra comunidad. Cada plato cuenta una historia de tradición, pasión y los ingredientes más frescos.</p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">Nuestros chefs han creado un menú que honra las recetas tradicionales mientras incorpora toques innovadores para sorprender a nuestros comensales.</p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-leaf text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark text-sm">Ingredientes Frescos</h4>
+                                <p class="text-gray-500 text-xs mt-1">Productores locales de la Araucanía</p>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <ul class="space-y-3">
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Palta Reina</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Huevo Peruano</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Tomate York</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
-                        <div class="relative overflow-hidden h-48">
-                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536269990_122109353792971952_6722819990932670277_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=_r2Zg_I2t1YQ7kNvwGOTs-K&_nc_oc=AdktXBIazPxZZY8oMeBWNZobuP2ZTYU1vOZySwyrapIXdcxR-QYN0ySasrq-rY_UZ40&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=olx4jd7ZeFJRyj0mSa-8OA&oh=00_AfXH4yiAUzxS5mL-84jhQD41y_ys1CQucaNMXUCzSBJ-eQ&oe=68AAD7BD" alt="Platos Principales" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                <h3 class="text-white text-2xl font-bold">Fondo</h3>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-utensils text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark text-sm">Tradición Culinaria</h4>
+                                <p class="text-gray-500 text-xs mt-1">Recetas de generaciones</p>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <ul class="space-y-3">
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Plateada</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Costillar de Cerdo Ahumado</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Lomo a lo Pobre</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
-                        <div class="relative overflow-hidden h-48">
-                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536272906_122109368774971952_1521439836372141768_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=f727a1&_nc_ohc=2vRKAbxmvLQQ7kNvwHvUJGD&_nc_oc=AdkPwz0Wb7q0RIlNyhx6QlzRWwAtP5mn3r_rCC2iE5XaDNjmc8SeGN0ScJIoieWpssI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=HUV5Pb6NSvdP6cFvDJFdpg&oh=00_AfV_rHCc5yHE0zbC5Mcz5c5Pk3IGqK7_EsRfZ4wlKDofnQ&oe=68AB07A4" alt="Ensaladas" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                <h3 class="text-white text-2xl font-bold">Empanada</h3>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-wine-glass-alt text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark text-sm">Bebidas Artesanales</h4>
+                                <p class="text-gray-500 text-xs mt-1">Vinos y cócteles chilenos</p>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <ul class="space-y-3">
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Empanada de Pino</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Empanada de Queso</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Empanada de Horno</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
-                        <div class="relative overflow-hidden h-48">
-                            <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536269766_122109369680971952_9003718111970200344_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=7stipRFWjcAQ7kNvwFQFd3c&_nc_oc=AdnAFAUnwn3f5I1c1SAvtTk73kYbpdMRm70ww04aBdyYYh2M4HILVyhonNRMoxYAS6c&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=Eiop35YbKyV-l6ctqd-LcQ&oh=00_AfU-BcBTWLeMsfIk82UinajxD1Of1CWQRUu4yDVXmTUUXA&oe=68AB0477" alt="Postres" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                <h3 class="text-white text-2xl font-bold">Brasero</h3>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heart text-primary-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark text-sm">Ambiente Familiar</h4>
+                                <p class="text-gray-500 text-xs mt-1">Experiencias memorables</p>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <ul class="space-y-3">
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Brasera para Dos</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Brasera para Tres</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Brasera para Cuatro</span>
-                                    <span class="text-amber-600">$</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center">
-                <a href="#" class="inline-block bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300">Ver Menú Completo</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="galeria" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nuestra Galería</h2>
-                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Un vistazo a nuestros platos, ambiente y eventos especiales</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536478579_122109350888971952_1487042408387031331_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=f727a1&_nc_ohc=zrIjr50wuWoQ7kNvwFXQIGj&_nc_oc=AdmPsg4rud6WhU3TdP83wWgRv9NCjuVn7N3rc18LAAshDVLSHn1SKvoM__iHWqWBI48&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=Hc8n5BPFC1HcCr0-yOc-gA&oh=00_AfVKSlSQYgt_BYazpPHXJ1DEkh5hmjPKIrztszG-d3_hXA&oe=68AAE658" alt="Margarita" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-                
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536146246_122108692520971952_5314672314057387633_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=f727a1&_nc_ohc=HJAFZxFLmlQQ7kNvwEf6eUK&_nc_oc=AdlsesHmNdPLCPeioEMV0xfIHR5Tv-vLUo5RqxQJ_WNjNOAJl_7M1BO2KP6StzRSDak&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=NkDs5xCT5kKS9pGT4Wx2Jw&oh=00_AfXl_Knw2rdj3iOo4qEqZjqY44HAvillEgcVDpPqu9pN4w&oe=68AF0A9D" alt="Baina" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-                
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/534982119_122108692526971952_6134847611655413751_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=oRJ0qGQFPzoQ7kNvwG3p21K&_nc_oc=AdlV3e161AAzc3KblJJzPdkfzRhKukfRi1c3tSeIA5uzoX4t0_LJ4pagnYzxPMVYrYU&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=JIU_2gSWRa59wqu_m1eA0Q&oh=00_AfXc8iJV17CbXy9I9Qt7UtTgzeWdwep6-2p21hwrJlPjlg&oe=68A94662" alt="Sangria" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-                
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/533928643_122108689268971952_3425484622989564664_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=-hEerPr3xYkQ7kNvwHlkemQ&_nc_oc=AdkxnRfR-IFbFF-nh81xsYRgp7hctv-IeAGNcWuCK0ufnYT7TkGI2ow4IwdnHnNMKWI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=5gQ-r4i43m-aAvRMCTm89A&oh=00_AfXOO9TiklINVbaxC7zyleJlTk_-dzmbDjWGlD3AW4uElA&oe=68A93EE0" alt="Barra" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-                
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536285239_122109405884971952_9060523884027548371_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_ohc=oWkI7SpjZYMQ7kNvwGPlNA7&_nc_oc=AdkvHh8bcMomdFGNEJeRkHoKn8sReCkMlos_c7kA1UNX9RMVe68VEGAxtkjVO1VQoRg&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=xYM0OhL0S_cqB8Pgzvw72Q&oh=00_AfX-X5jjOVKAIP4IrPKhM4P9ffcKz61vLolosrA5CqvX2g&oe=68AB1B3D" alt="Sour Empanada" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536273892_122109406982971952_5822333039095568729_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=f727a1&_nc_ohc=gzfQI7lF85YQ7kNvwFJOlR8&_nc_oc=AdkrlfOsvtlLJU52OBu2VgU8XYETR6eaD5NyOhII1YreFEEhxeC9JREvptteGSWZrO0&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=1Us6MxHDxbUlxFxuaNCpQg&oh=00_AfWz3SxX69-YtAENcaPLJFfORxZzO54HKyB0F5fAMuDeiw&oe=68AB34C4" alt="Ensaladas" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536280418_122109409238971952_1996310312974086377_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=110&ccb=1-7&_nc_sid=f727a1&_nc_ohc=KwV4yGv3gQkQ7kNvwEwxqt3&_nc_oc=AdmmIp2y9-xDeXVJr2qogg5qnYLWCH9SC_MR2OwXHXUTgzUTcdEiQq3Z3WXU1n_82Aw&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=BSdmAK9xBPgPaEUZHasy_A&oh=00_AfUacqrQ6uxdp6cAB8PrehjYFdyLpmvmD9aYygcQ3zAyXA&oe=68AB0065" alt="Pescado" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/536670149_122108692592971952_5129412856019465775_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=f727a1&_nc_ohc=q07fvbRKnRgQ7kNvwHKJalg&_nc_oc=Adm7Oq30zeYVPvPGTI6zzJMjKP3aWF3vuZHK3IeX3qE_tS3udSz1569num7xTu9dLJI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=p8u0CFTMgK1-8VWipFUCTQ&oh=00_AfWgdtzBdkDnz2JQz4P3k62GChIDyPXwLC3oELKvBU7Tow&oe=68A92A14" alt="Apperol" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
-                    </div>
-                </div>
-
-                <div class="relative group overflow-hidden rounded-lg shadow-md">
-                    <img src="https://scontent.fzco1-1.fna.fbcdn.net/v/t39.30808-6/534699655_122108692514971952_2553792779533631543_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=MgF_qx4uBxIQ7kNvwFpdI5g&_nc_oc=AdnGo7PIn1O_oT3QdhXeG7OBaBd5Vi2ZZUZ3T4Sc6dJo0kkpWv6Ym19VMJMV-qKvrlI&_nc_zt=23&_nc_ht=scontent.fzco1-1.fna&_nc_gid=FlhCqnxS6HKuhk3A0oL_6g&oh=00_AfVyPG1EJ-H5LFL6tKfHoZJPpFDui00VBMDvvkorBEkvzA&oe=68AAD2F7" alt="Pisco Sour" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <i class="fas fa-search-plus text-white text-3xl"></i>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonios" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Lo que dicen nuestros clientes</h2>
-                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Experiencias reales de nuestros comensales</p>
+    <!-- Stats -->
+    <section class="py-16 bg-dark text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary-500 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-72 h-72 bg-primary-600 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal p-4">
+                    <div class="stat-number text-5xl font-display font-bold mb-2 text-primary-400" data-target="30">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Años de Experiencia</div>
+                </div>
+                <div class="reveal p-4">
+                    <div class="stat-number text-5xl font-display font-bold mb-2 text-primary-400" data-target="50">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Platos en el Menú</div>
+                </div>
+                <div class="reveal p-4">
+                    <div class="stat-number text-5xl font-display font-bold mb-2 text-primary-400" data-target="1000">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Clientes Felices</div>
+                </div>
+                <div class="reveal p-4">
+                    <div class="stat-number text-5xl font-display font-bold mb-2 text-primary-400" data-target="24">0</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Eventos Anuales</div>
+                </div>
             </div>
-            
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="py-24 lg:py-32 bg-warm-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14 reveal">
+                <span class="text-primary-500 text-sm tracking-[0.2em] uppercase font-semibold">Nuestro Menú</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mt-3 mb-4">Sabores que enamoran</h2>
+                <div class="section-divider mx-auto mb-6"></div>
+                <p class="text-gray-500 max-w-xl mx-auto">Una selección de nuestros platos más destacados, preparados con ingredientes de temporada y mucho cariño</p>
+            </div>
+
+            <!-- Category Nav -->
+            <div class="mb-12 reveal">
+                <div class="cat-nav flex overflow-x-auto gap-6 md:gap-8 justify-center pb-2 border-b border-gray-200">
+                    <a href="#entradas" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm active">Entradas</a>
+                    <a href="#fondos" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Platos de Fondo</a>
+                    <a href="#empanadas" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Empanadas</a>
+                    <a href="#ensaladas" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Ensaladas</a>
+                    <a href="#pescados" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Pescados</a>
+                    <a href="#brasero" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Brasero</a>
+                    <a href="#postres" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Postres</a>
+                    <a href="#cocktail" class="cat-link text-gray-500 hover:text-primary-600 font-medium text-sm">Cocktail</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Entradas -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="entradas">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu/IMG_20241203_125513.jpg" alt="Entradas" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Entradas</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Palta Reina</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Palta rellena con pollo, mayonesa casera y lechuga</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Huevo Peruano</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Huevo duro relleno con atún y mayonesa</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Tomate York</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Tomate relleno con jamón york y mayonesa</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Platos de Fondo -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="fondos">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu/IMG_20250221_145847.jpg" alt="Platos de Fondo" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Platos de Fondo</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Plateada</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Tradicional plateada con puré y ensalada</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Costillar Ahumado</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Costillar ahumado con salsa BBQ y guarnición</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Lomo a lo Pobre</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Lomo vetado con huevo, cebolla y papas fritas</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Empanadas -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="empanadas">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu/IMG_20250221_144556~2.jpg" alt="Empanadas" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Empanadas</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Empanada de Pino</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Tradicional empanada de pino chileno</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Empanada de Queso</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Empanada de queso fundido</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Empanada de Horno</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Empanada de horno con pino</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ensaladas -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="ensaladas">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu-1/IMG_20240911_143423.jpg" alt="Ensaladas" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Ensaladas</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Ensalada a la Chilena</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Tradicional chileno</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Ensalada Surtida</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Con verduras frescas</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Ensalada Rusa</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Verduras de la zona</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pescados -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="pescados">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu-1/IMG_20240908_154705.jpg" alt="Pescados" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Pescados</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Salmon</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Del sur de Chile</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Merluza</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Merluza Austral</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Congrio</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Congrio Chileno</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Braseros -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="brasero">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu/IMG_20250221_151020~2.jpg" alt="Braseros" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Braseros</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Brasero para Dos</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Selección de carnes para dos personas</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Brasero para Tres</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Selección de carnes para tres personas</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Brasero para Cuatro</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Selección de carnes para cuatro personas</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Postres -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="postres">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu-1/IMG_3190.jpg" alt="Postres" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Postres</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Semola con Leche</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Tradicional postre chileno</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Durazno con Crema</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Conservas caseras</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Leche Asada</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Postre chileno</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cocktail -->
+                <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl" id="cocktail">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="menu-1/IMG_20250620_125225.jpg" alt="Cocktail" class="menu-card-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Cocktail</h3>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Margarita</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Tequila, triple seco y jugo de limón</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Sangria</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Al estilo de nuestro Club</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                            <li class="flex justify-between items-start gap-3">
+                                <div>
+                                    <span class="font-semibold text-dark text-sm">Vaina</span>
+                                    <p class="text-xs text-gray-400 mt-0.5">Estilo del Sur</p>
+                                </div>
+                                <span class="text-primary-500 font-bold text-sm whitespace-nowrap">$</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center reveal">
+                <a href="#" class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 text-sm tracking-wide">
+                    VER MENÚ COMPLETO <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events -->
+    <section id="eventos" class="py-24 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14 reveal">
+                <span class="text-primary-500 text-sm tracking-[0.2em] uppercase font-semibold">Eventos</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mt-3 mb-4">Celebra con nosotros</h2>
+                <div class="section-divider mx-auto mb-6"></div>
+                <p class="text-gray-500 max-w-xl mx-auto">Hacemos de cada ocasión un momento inolvidable</p>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="text-amber-500 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                <div class="event-card bg-warm-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="menu-1/IMG_20250711_123730.jpg" alt="Cumpleaños" class="event-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Cumpleaños</h3>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6">"Las mejores empanadas que he probado en esta región. El ambiente es acogedor y el servicio impecable.</p>
-                    <div class="flex items-center">
-                        <img src="https://randomuser.me/api/portraits/women/34.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Celebra tu día especial con nosotros. Menú especial, decoración y un regalo sorpresa para el cumpleañero.</p>
+                        <a href="#contacto" class="text-primary-500 text-sm font-semibold hover:text-primary-700 transition inline-flex items-center gap-1">
+                            Más información <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="event-card bg-warm-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="menu-1/IMG_20241210_180746.jpg" alt="Aniversarios" class="event-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Aniversarios</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Celebra tu amor con una íntima ocasión. Menú degustación, vino y ambiente especial para parejas.</p>
+                        <a href="#contacto" class="text-primary-500 text-sm font-semibold hover:text-primary-700 transition inline-flex items-center gap-1">
+                            Más información <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="event-card bg-warm-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="menu-1/IMG_20240919_125618.jpg" alt="Eventos Corporativos" class="event-img w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-5">
+                            <h3 class="text-white text-xl font-display font-bold">Corporativos</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Espacio ideal para tus eventos corporativos. Menú ejecutivo, proyector y ambiente adecuado para reuniones.</p>
+                        <a href="#contacto" class="text-primary-500 text-sm font-semibold hover:text-primary-700 transition inline-flex items-center gap-1">
+                            Más información <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="galeria" class="py-24 lg:py-32 bg-warm-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14 reveal">
+                <span class="text-primary-500 text-sm tracking-[0.2em] uppercase font-semibold">Galería</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mt-3 mb-4">Momentos capturedos</h2>
+                <div class="section-divider mx-auto mb-6"></div>
+                <p class="text-gray-500 max-w-xl mx-auto">Un vistazo a nuestros platos, ambiente y eventos especiales</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_20250620_125225.jpg" alt="Margarita" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_20240911_140739.jpg" alt="Vaina" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_20241018_134938.jpg" alt="Sangria" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_20250818_102119.jpg" alt="Barra" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_3192.jpg" alt="Sour Empanada" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_20240911_143423.jpg" alt="Ensalada" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu/IMG_20250622_184633.jpg" alt="ramazzotti" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu/IMG_20250818_101539.jpg" alt="Salon" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu/IMG_20240819_142716.jpg" alt="Pisco Sour" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_3190.jpg" alt="Semola" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_20250814_152254.jpg" alt="Jugos" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item rounded-xl aspect-square" onclick="openLightbox(this)">
+                    <img src="menu-1/IMG_3191.jpg" alt="Durazno" class="w-full h-full object-cover">
+                    <div class="overlay rounded-xl"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonios" class="py-24 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14 reveal">
+                <span class="text-primary-500 text-sm tracking-[0.2em] uppercase font-semibold">Testimonios</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mt-3 mb-4">Lo que dicen nuestros clientes</h2>
+                <div class="section-divider mx-auto mb-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-warm-50 p-8 rounded-2xl shadow-sm">
+                    <div class="flex text-primary-400 mb-4 gap-0.5">
+                        <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">"Las mejores empanadas que he probado en esta región. El ambiente es acogedor y el servicio impecable. Volveré seguro con mi familia."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://randomuser.me/api/portraits/women/34.jpg" alt="Sofía Muñoz" class="w-11 h-11 rounded-full object-cover">
                         <div>
-                            <h4 class="font-semibold text-gray-800">Sofia Muñoz</h4>
-                            <p class="text-gray-500 text-sm">Cliente habitual</p>
+                            <h4 class="font-semibold text-dark text-sm">Sofía Muñoz</h4>
+                            <p class="text-gray-400 text-xs">Cliente habitual</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="text-amber-500 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+
+                <div class="testimonial-card bg-warm-50 p-8 rounded-2xl shadow-sm">
+                    <div class="flex text-primary-400 mb-4 gap-0.5">
+                        <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
                     </div>
-                    <p class="text-gray-600 mb-6">"Celebramos nuestro aniversario aquí y fue una experiencia memorable. La atención personalizada y los platos exquisitos hicieron la tarde perfecta."</p>
-                    <div class="flex items-center">
-                        <img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">"Celebramos nuestro aniversario aquí y fue una experiencia memorable. La atención personalizada y los platos exquisitos hicieron la tarde perfecta."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://randomuser.me/api/portraits/men/20.jpg" alt="Carlos Jorquera" class="w-11 h-11 rounded-full object-cover">
                         <div>
-                            <h4 class="font-semibold text-gray-800">Carlos Jorquera</h4>
-                            <p class="text-gray-500 text-sm">Primera visita</p> 
+                            <h4 class="font-semibold text-dark text-sm">Carlos Jorquera</h4>
+                            <p class="text-gray-400 text-xs">Primera visita</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="text-amber-500 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
+
+                <div class="testimonial-card bg-warm-50 p-8 rounded-2xl shadow-sm">
+                    <div class="flex text-primary-400 mb-4 gap-0.5">
+                        <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star-half-alt text-sm"></i>
                     </div>
-                    <p class="text-gray-600 mb-6">"Como amante de la cocina chilena, puedo decir que este restaurante captura auténticamente los sabores de la región. ¡Los cocktail son para morirse!."</p>
-                    <div class="flex items-center">
-                        <img src="https://randomuser.me/api/portraits/women/13.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">"Como amante de la cocina chilena, puedo decir que este restaurante captura auténticamente los sabores de la región. ¡Los cócteles son para morirse!"</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://randomuser.me/api/portraits/women/13.jpg" alt="Ana Torres" class="w-11 h-11 rounded-full object-cover">
                         <div>
-                            <h4 class="font-semibold text-gray-800">Ana Torres</h4>
-                            <p class="text-gray-500 text-sm">Cliente habitual</p>
+                            <h4 class="font-semibold text-dark text-sm">Ana Torres</h4>
+                            <p class="text-gray-400 text-xs">Cliente habitual</p>
                         </div>
                     </div>
                 </div>
@@ -376,35 +1057,37 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contacto" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Contáctanos</h2>
-                <div class="w-24 h-1 bg-amber-600 mx-auto"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto mt-4">Reserva tu mesa o envíanos un mensaje. Estamos aquí para hacerte disfrutar de una experiencia culinaria inolvidable.</p>
+    <!-- Contact -->
+    <section id="contacto" class="py-24 lg:py-32 bg-warm-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14 reveal">
+                <span class="text-primary-500 text-sm tracking-[0.2em] uppercase font-semibold">Contacto</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mt-3 mb-4">Escríbenos</h2>
+                <div class="section-divider mx-auto mb-6"></div>
+                <p class="text-gray-500 max-w-xl mx-auto">Estamos aquí para responder tus preguntas y hacerte disfrutar de una experiencia culinaria inolvidable.</p>
             </div>
-            
-            <div class="flex flex-col lg:flex-row gap-12">
+
+            <div class="flex flex-col lg:flex-row gap-10">
+                <!-- Form -->
                 <div class="lg:w-1/2">
-                    <form class="space-y-6">
+                    <form class="bg-white p-8 md:p-10 rounded-2xl shadow-sm space-y-6" onsubmit="handleSubmit(event)">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-gray-700 mb-2">Nombre</label>
-                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <div class="form-group">
+                                <input type="text" id="name" placeholder=" " class="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition text-sm">
+                                <label for="name">Nombre</label>
                             </div>
-                            <div>
-                                <label for="email" class="block text-gray-700 mb-2">Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <div class="form-group">
+                                <input type="email" id="email" placeholder=" " class="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition text-sm">
+                                <label for="email">Email</label>
                             </div>
                         </div>
-                        <div>
-                            <label for="phone" class="block text-gray-700 mb-2">Teléfono</label>
-                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder=" " class="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition text-sm">
+                            <label for="phone">Teléfono</label>
                         </div>
                         <div>
-                            <label for="subject" class="block text-gray-700 mb-2">Asunto</label>
-                            <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <label for="subject" class="block text-dark text-sm font-medium mb-2">Asunto</label>
+                            <select id="subject" class="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition text-sm text-gray-600">
                                 <option value="">Selecciona una opción</option>
                                 <option value="reservation">Reserva</option>
                                 <option value="event">Evento especial</option>
@@ -412,71 +1095,80 @@
                                 <option value="other">Otro</option>
                             </select>
                         </div>
-                        <div>
-                            <label for="message" class="block text-gray-700 mb-2">Mensaje</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+                        <div class="form-group">
+                            <textarea id="message" rows="4" placeholder=" " class="w-full px-4 py-3.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition text-sm resize-none"></textarea>
+                            <label for="message">Mensaje</label>
                         </div>
-                        <button type="submit" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300 w-full md:w-auto">Enviar Mensaje</button>
+                        <button type="submit" class="w-full md:w-auto bg-primary-500 hover:bg-primary-600 text-white px-8 py-3.5 rounded-full font-semibold transition-all duration-300 shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 text-sm tracking-wide">
+                            ENVIAR MENSAJE
+                        </button>
                     </form>
                 </div>
-                
+
+                <!-- Info -->
                 <div class="lg:w-1/2">
-                    <div class="bg-gray-100 p-8 rounded-lg h-full">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Información de contacto</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="text-amber-600 mt-1 mr-4">
-                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                    <div class="bg-dark text-white p-8 md:p-10 rounded-2xl h-full relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl"></div>
+                        <div class="relative z-10">
+                            <h3 class="font-display text-2xl font-bold mb-8">Información de contacto</h3>
+
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt text-primary-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm mb-1">Dirección</h4>
+                                        <p class="text-gray-400 text-sm">Confederación Suiza, 1053<br>Victoria, Región de la Araucanía, Chile</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Dirección</h4>
-                                    <p class="text-gray-600">Confederacion Suiza, 1053<br>Victoria, Chile</p>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-phone-alt text-primary-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm mb-1">Teléfono</h4>
+                                        <p class="text-gray-400 text-sm">(45) 2841560</p>
+                                        <p class="text-gray-400 text-sm">+56 962516121 (WhatsApp)</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope text-primary-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm mb-1">Email</h4>
+                                        <p class="text-gray-400 text-sm">rhclubsocial@hotmail.com</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-clock text-primary-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-sm mb-1">Horario</h4>
+                                        <p class="text-gray-400 text-sm">Lunes a Viernes 09:30 - 17:30</p>
+                                        <p class="text-gray-400 text-sm">Sábado y Domingo 09:30 - 17:30</p>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-amber-600 mt-1 mr-4">
-                                    <i class="fas fa-phone-alt text-xl"></i>
+
+                            <div class="mt-8 pt-6 border-t border-gray-800">
+                                <h4 class="font-semibold text-sm mb-4">Síguenos</h4>
+                                <div class="flex gap-3">
+                                    <a href="https://www.facebook.com/profile.php?id=61579158587405" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all duration-300">
+                                        <i class="fab fa-facebook-f text-sm"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/club.socialvictoria/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all duration-300">
+                                        <i class="fab fa-instagram text-sm"></i>
+                                    </a>
+                                    <a href="https://wa.me/56962516121" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all duration-300">
+                                        <i class="fab fa-whatsapp text-sm"></i>
+                                    </a>
                                 </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Teléfono</h4>
-                                    <p class="text-gray-600">(45) 2841560</p>
-                                    <p class="text-gray-600">+56 962516121 (WhatsApp)</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-amber-600 mt-1 mr-4">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Email</h4>
-                                    <p class="text-gray-600">rhclubsocial@hotmail.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="text-amber-600 mt-1 mr-4">
-                                    <i class="fas fa-clock text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Horario</h4>
-                                    <p class="text-gray-600">Lunes - Viernes: 09:30 - 18:00</p>
-                                    <p class="text-gray-600">Sábado - Domingo: 09:30 - 18:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="font-semibold text-gray-800 mb-4">Síguenos en redes sociales</h4>
-                            <div class="flex space-x-4">
-                                <a href="https://www.facebook.com/profile.php?id=61579158587405" class="bg-gray-200 hover:bg-amber-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="https://www.instagram.com/club.socialvictoria/" class="bg-gray-200 hover:bg-amber-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -485,156 +1177,266 @@
         </div>
     </section>
 
-    <!-- Map Section -->
-    <div class="h-96 w-full">
+    <!-- Map -->
+    <div id="map" class="h-80 w-full">
         <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3113.073146719947!2d-72.334599!3d-38.2330624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966b14b4b87c30c3%3A0x53f9fbb906edc1b1!2sClub%20Social%20Victoria!5e0!3m2!1ses-419!2scl!4v1712345678901!5m2!1ses-419!2scl" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div>
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <i class="fas fa-utensils text-2xl text-amber-600 mr-2"></i>
-                        CLUB SOCIAL VICTORIA
-                    </h3>
-                    <p class="text-gray-400">Ofreciendo auténtica cocina CHILENA desde 1992. Pasión, tradición y calidad en cada plato.</p>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Enlaces rápidos</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#inicio" class="text-gray-400 hover:text-amber-500 transition">Inicio</a></li>
-                        <li><a href="#menu" class="text-gray-400 hover:text-amber-500 transition">Menú</a></li>
-                        <li><a href="#galeria" class="text-gray-400 hover:text-amber-500 transition">Galería</a></li>
-                        <li><a href="#contacto" class="text-gray-400 hover:text-amber-500 transition">Contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Horario</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li class="flex justify-between">
-                            <span>Lun - Vie</span>
-                            <span>09:30 - 18:00</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Sáb - Dom</span>
-                            <span>09:30 - 18:00</span>
-                        </li>
-                    </ul>
-                    <div class="mt-4">
-                        <h4 class="text-lg font-semibold mb-2">Reservas</h4>
-                        <p class="text-gray-400">(45) 2841560</p>
+                    <div class="flex items-center gap-3 mb-5">
+                        <img src="https://cdn-icons-png.flaticon.com/512/706/706797.png" alt="Logo" class="w-8 h-8">
+                        <span class="font-display text-lg font-bold">Club Social Victoria</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-5">Ofreciendo auténtica cocina chilena desde 1992. Pasión, tradición y calidad en cada plato.</p>
+                    <div class="flex gap-3">
+                        <a href="https://www.facebook.com/profile.php?id=61579158587405" target="_blank" rel="noopener noreferrer" class="w-9 h-9 bg-white/5 hover:bg-primary-500 rounded-lg flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="https://www.instagram.com/club.socialvictoria/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 bg-white/5 hover:bg-primary-500 rounded-lg flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="https://wa.me/56962516121" target="_blank" rel="noopener noreferrer" class="w-9 h-9 bg-white/5 hover:bg-primary-500 rounded-lg flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-whatsapp text-sm"></i>
+                        </a>
                     </div>
                 </div>
-                
+
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Suscríbete para recibir nuestras promociones y eventos especiales.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Tu email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
-                        <button type="submit" class="bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-r-lg transition duration-300">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                    <h4 class="font-semibold mb-5 text-sm tracking-wide">ENLACES RÁPIDOS</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#inicio" class="text-gray-500 hover:text-primary-400 transition text-sm">Inicio</a></li>
+                        <li><a href="#menu" class="text-gray-500 hover:text-primary-400 transition text-sm">Menú</a></li>
+                        <li><a href="#galeria" class="text-gray-500 hover:text-primary-400 transition text-sm">Galería</a></li>
+                        <li><a href="#eventos" class="text-gray-500 hover:text-primary-400 transition text-sm">Eventos</a></li>
+                        <li><a href="#testimonios" class="text-gray-500 hover:text-primary-400 transition text-sm">Testimonios</a></li>
+                        <li><a href="#contacto" class="text-gray-500 hover:text-primary-400 transition text-sm">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm tracking-wide">HORARIO</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex justify-between text-gray-500">
+                            <span>Lunes a Viernes</span>
+                            <span>09:30 - 17:30</span>
+                        </li>
+                        <li class="flex justify-between text-gray-500">
+                            <span>Sábado y Domingo</span>
+                            <span>09:30 - 17:30</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <h4 class="font-semibold mb-3 text-sm tracking-wide">RESERVAS</h4>
+                        <p class="text-gray-500 text-sm">(45) 2841560</p>
+                        <p class="text-gray-500 text-sm">+56 962516121</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm tracking-wide">UBICACIÓN</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">Confederación Suiza, 1053<br>Victoria, Región de la Araucanía, Chile</p>
+                    <a href="#map" class="text-primary-400 hover:text-primary-300 transition text-sm inline-flex items-center gap-1">
+                        Ver en mapa <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Club Social Victoria. Todos los derechos reservados.</p>
-                <div class="flex space-x-6">
-                    <a href="https://www.facebook.com/profile.php?id=61579158587405" class="text-gray-400 hover:text-amber-500 transition">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.instagram.com/club.socialvictoria/" class="text-gray-400 hover:text-amber-500 transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-xs">© 2026 Club Social Victoria. Todos los derechos reservados.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-600 hover:text-primary-400 transition text-xs">Política de Privacidad</a>
+                    <a href="#" class="text-gray-600 hover:text-primary-400 transition text-xs">Términos de Servicio</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 bg-amber-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
-        <i class="fas fa-arrow-up"></i>
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/56962516121" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up text-sm"></i>
     </button>
 
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script>
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        // Initialize Lucide
+        lucide.createIcons();
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobile-overlay').classList.toggle('open');
+            document.getElementById('mobile-panel').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobile-panel').classList.contains('open') ? 'hidden' : '';
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        const heroSection = document.getElementById('inicio');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            
+            // Navbar glass effect
+            if (scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to top
+            if (scrollY > 600) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            // Active nav link
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
         });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // Close mobile menu if open
-                    mobileMenu.classList.add('hidden');
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+
+        // Parallax hero
+        window.addEventListener('scroll', () => {
+            const heroBg = document.getElementById('hero-bg');
+            if (heroBg) {
+                const scrolled = window.scrollY;
+                heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 100);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Counter animation
+        let countersAnimated = false;
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    const counters = document.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const duration = 2000;
+                        const start = performance.now();
+                        
+                        function updateCounter(currentTime) {
+                            const elapsed = currentTime - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const eased = 1 - Math.pow(1 - progress, 3);
+                            const current = Math.floor(eased * target);
+                            counter.textContent = current.toLocaleString() + (target >= 100 ? '+' : '+');
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            }
+                        }
+                        requestAnimationFrame(updateCounter);
                     });
                 }
             });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stat-number');
+        if (statsSection) statObserver.observe(statsSection.closest('section'));
+
+        // Gallery lightbox
+        function openLightbox(el) {
+            const img = el.querySelector('img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeLightbox();
         });
-        
-        // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('opacity-0', 'invisible');
-                backToTopButton.classList.add('opacity-100', 'visible');
-            } else {
-                backToTopButton.classList.remove('opacity-100', 'visible');
-                backToTopButton.classList.add('opacity-0', 'invisible');
-            }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
         });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+
+        // Category nav active state
+        const catLinks = document.querySelectorAll('.cat-link');
+        catLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                catLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
             });
         });
-        
-        // Animation on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.animate-fade-in');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = '¡ENVIADO!';
+            btn.classList.remove('bg-primary-500');
+            btn.classList.add('bg-green-500');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('bg-green-500');
+                btn.classList.add('bg-primary-500');
+                e.target.reset();
+            }, 2500);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        };
-        
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
+        });
     </script>
+<script src="© 2026 Club Social Victoria. Todos los derechos reservados."></script>
 </body>
 </html>
